@@ -16,8 +16,8 @@
 uint8_t broadcastAddress[] = {0x40, 0xF5, 0x20, 0x0C, 0x14, 0x93};
 
 // Set your Board ID
-#define BOARD_ID 4
-#define BOARD_ID2 5
+#define BOARD_ID 4 //sypialnia
+#define BOARD_ID2 5 //prysznic
 
 // Structure example to send data
 // Must match the receiver structure
@@ -73,8 +73,8 @@ ESP8266WebServer server(80);
 // The value will quickly become too large for an int to store
 unsigned long previousMillis = 0;    // will store last time DHT was updated
 
-// Updates DHT readings every 10 seconds
-const long interval = 10000;  
+// Updates DHT readings every 1,5 minute
+const long interval = 10000; 
 
 //// HTML PAGE
 const char index_html[] PROGMEM = R"rawliteral(
@@ -195,9 +195,6 @@ void setup(){
   // Print ESP8266 Local IP Address
   Serial.println(WiFi.localIP());
 
-  // Print ESP8266 Local IP Address
-  Serial.println(WiFi.localIP());
-
   // Init ESP-NOW
   if (esp_now_init() != 0) {
     Serial.println("Error initializing ESP-NOW");
@@ -281,7 +278,7 @@ void loop(){
     }
     // Set values to send
     myData.id = BOARD_ID;
-    myData.id = BOARD_ID2;
+    myData1.id = BOARD_ID2;
     // Send message via ESP-NOW
     esp_now_send(0, (uint8_t *) &myData, sizeof(myData)); 
     esp_now_send(0, (uint8_t *) &myData1, sizeof(myData1)); 
